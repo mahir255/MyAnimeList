@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyAnimeList</title>
+</head>
+
+
+<body onload="reloadTaskCard()">
+    <div class="modal fade" id="newcardmodal" tabindex="-1" aria-labelledby="newCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ADD NEW Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="imageURL" class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="imageURL"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="animeTitle" class="form-label">Anime Title</label>
+                        <input type="text" class="form-control" id="animeTitle"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="animeGenre" class="form-label">Anime Genre</label>
+                        <input type="text" class="form-control" id="animeGenre"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="animeScore" class="form-label">Anime Score</label>
+                        <select id="animeScore" class="form-select" aria-label="Select Workout Type">
+                         <strong><option selected value="Select Your Score">Select Your Score</option></strong>    
+                            <option value="(10) Masterpiece">(10) Masterpiece</option>
+                            <option value="(9) Great">(9) Great</option>
+                            <option value="(8) Very Good">(8) Very Good</option>
+                            <option value="(7) Good">(7) Good</option>
+                            <option value="(6) Fine">(6) Fine</option>
+                            <option value="(5) Average">(5) Average</option>
+                            <option value="(4) Bad">(4) Bad</option>
+                            <option value="(3) Very Bad">(3) Very Bad</option>
+                            <option value="(2) Horrible">(2) Horrible</option>
+                            <option value="(1) Appalling">(1) Appalling</option>
+                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="animeReview" class="form-label">Anime Review</label>
+                        <textarea rows="3" class="form-control" id="animeReview"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="addCard()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        SAVE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid " >
+            <a class="navbar-brand" href="#">
+                <img src="./assets/mal.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                MyAnimeList
+              </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end  " id="navbarSupportedContent">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcardmodal">
+                    <i class="fas fa-plus"></i> REVIEW ANIME
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="heading">MyAnimeList</h1>
+            <p class="lead text-muted">MyAnimeList, often abbreviated as MAL, is an anime and manga social networking and social cataloging application website run by volunteers. The site provides its users with a list-like system to organize and score anime and manga.</p>
+            <p>
+            <button class="btn btn-primary">Review Anime</button>
+            <a href="#taskContentsrow" class="btn btn-secondary my-2">Your Reviews</a>
+            </p>
+        </div>
+    </section>
+
+
+    <main class="container">
+     
+       
+
+
+
+
+    <section class="mt-4">
+        <div class="input-group w-75 m-auto">
+            <input type="text" class="form-control" placeholder="Search Animes" id="searchedMovie" >
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="searchMovie()">
+                        <i class="fa fa-search" ></i>
+                    </button>
+                </div>
+        </div>
+    </section><br>
+      
+            
+    <!--------------------------Carousel----------------------------------->
+    <section class="slide-container">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./assets/first.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Attack on Titan</h5>
+                <p>After his hometown is destroyed and his mother is killed, young Eren Jaeger vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/second.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Demon Slayer</h5>
+                <p>A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly. Tanjiro sets out to become a demon slayer to avenge his family and cure his sister.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/third.jpg" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>One Piece</h5>
+                <p>Follows the adventures of Monkey D. Luffy and his pirate crew in order to find the greatest treasure ever left by the legendary Pirate, Gold Roger.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+    </section>
+    <!--------------------------Carousel----------------------------------->
+    <br>
+        <center><h1>Your Reviews</h1></center>
+    <br> 
+
+
+    <section>
+        <div id="taskContentsrow" class="row">
+            <div class="col-md-6 col-lg-4 mt-3 shadow p-3 mb-5 bg-white rounded"}>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-outline-info">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" name=${id} onclick="deleteTask(this)">
+                                <i class="far fa-trash-alt" name=${id} onclick="deleteTask(this)"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <img src="https://wallpaperaccess.com/full/677430.jpg" class="card-img-top" alt="image"/>
+                    <div class="card-body">
+                        <h2 class="card-title">Naruto Shippuden</h2><hr>
+                        <h5 class="badge badge-pill bg-dark bg-opacity-75">Action, Adventure, Drama, Fantasy</h5><br>
+                        <h6 class="fa fa-star checked"> (9) Great</h6>
+                        <p class="card-review ">Great show</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-primary float-end">Open Review</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+   
+
+
+    <br><br><br>
+  <!-------------------------Footer--------------------------->
+  <section>
+    <div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Partnerships</h3>
+                    <ul>
+                        <li><a href="#">Rotten Tomatoes</a></li>
+                        <li><a href="#">IMBD</a></li>
+                        <li><a href="#">World Review</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Creators</a></li>
+                        <li><a href="#">Company</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item-text">
+                    <h3>MyAnimeList</h3>
+
+                    <p>MyAnimeList, often abbreviated as MAL, is an anime and manga social networking and social cataloging application website run by volunteers. The site provides its users with a list-like system to organize and score anime and manga.</p>
+                </div>
+                <div class="container">
+                    <div class="row ">
+                      <div class="d-flex justify-content-center">
+                        <ul class="social-network social-circle">
+                            <br><br> <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+          
+            <p class="copyright"> <br>Copyright © 2021</p>
+        </div>
+    </footer>
+</div>
+</section>
+<!-------------------------Footer--------------------------->
+
+
+   
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
