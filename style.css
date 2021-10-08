@@ -32,6 +32,11 @@
 
 .checked{
   color: orange;
+
+}
+
+.card-title{
+  margin-bottom: 2px solid black;
 }
 
 

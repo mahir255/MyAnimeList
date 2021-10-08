@@ -32,10 +32,10 @@ const generateTaskCard = ({id, url, title, genre,score, review}) => {
             </div>
             <img src=${url} class="card-img-top" alt="image"/>
             <div class="card-body">
-                <h2 class="card-title">${title}</h2>
-                <h5 class="badge badge-pill bg-dark bg-opacity-75">${genre}</h5>
-                <h6 class="card-score"><i class="fa fa-star checked" > </i> ${score}</h6>
-                <p class="card-text">${review}</p>
+                <h2  style="margin-bottom: 1px solid black";>${title}</h2>
+                <h5 class="badge badge-pill bg-dark bg-opacity-75">${genre}</h5><br>
+                <h6 class="fa fa-star checked"> ${score}</h6>
+                <p class="card-text">${review}</p> 
             </div>
             <div class="card-footer">
                 <button class="btn btn-outline-primary float-end">Open Review</button>
@@ -73,14 +73,17 @@ const editTask = (e) => {
     console.log(e)
     console.log(e.parentNode)
     console.log(e.parentNode.parentNode.parentNode.childNodes)
+    console.log(e.parentNode.parentNode.parentNode.childNodes[3])
     console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1])
     console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3])
-    console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5])
+    console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[6])
+    console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[8])
 
+    e.parentNode.parentNode.parentNode.childNodes[3].setAttribute("contenteditable", "true")
     e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1].setAttribute("contenteditable", "true")
     e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].setAttribute("contenteditable", "true")
-    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5].setAttribute("contenteditable", "true")
-    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[7].setAttribute("contenteditable", "true")
+    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[6].setAttribute("contenteditable", "true")
+    e.parentNode.parentNode.parentNode.childNodes[5].childNodes[8].setAttribute("contenteditable", "true")
     
 
     
@@ -103,8 +106,8 @@ const saveEditTask = (e) => {
         url: e.parentNode.parentNode.childNodes[3].getAttribute("name"),
         title: e.parentNode.parentNode.childNodes[5].childNodes[1].innerHTML,
         genre: e.parentNode.parentNode.childNodes[5].childNodes[3].innerHTML,
-        score: e.parentNode.parentNode.childNodes[5].childNodes[5].innerHTML,
-        review: e.parentNode.parentNode.childNodes[5].childNodes[7].innerHTML
+        score: e.parentNode.parentNode.childNodes[5].childNodes[6].innerHTML,
+        review: e.parentNode.parentNode.childNodes[5].childNodes[8].innerHTML
     }
     const refid = e.parentNode.parentNode.parentNode.getAttribute("id")
     console.log(refid)
